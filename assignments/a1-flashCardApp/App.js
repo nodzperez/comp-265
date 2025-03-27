@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 
+// declare an array of flashcards
 const flashCards = [
   {
     question: "What is the capital of Canada?",
@@ -18,17 +19,31 @@ const flashCards = [
 ];
 
 export default function App() {
+  //declare state variables
   const [index, setIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
 
   const nextCard = () => {
-    setIndex((index + 1) % flashcards.length);
+    setIndex((index + 1) % flashCards.length);
     setShowAnswer(false);
   };
+
+  //flashcard proper
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      {/* display question or answer based on the state of showAnswer */}
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() => setShowAnswer(!showAnswer)}
+      >
+        <Text style={styles.text}>
+          {showAnswer ? flashCards[index].answer : flashCards[index].question}
+        </Text>
+        {/* display Next */}
+        <TouchableOpacity style={styles.button} onPress={nextCard}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
+      </TouchableOpacity>
     </View>
   );
 }
