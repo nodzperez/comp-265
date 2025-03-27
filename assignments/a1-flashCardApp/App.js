@@ -39,10 +39,15 @@ export default function App() {
         <Text style={styles.text}>
           {showAnswer ? flashCards[index].answer : flashCards[index].question}
         </Text>
-        {/* display Next */}
-        <TouchableOpacity style={styles.button} onPress={nextCard}>
-          <Text style={styles.buttonText}>Next</Text>
-        </TouchableOpacity>
+      </TouchableOpacity>
+      {/* show answer button */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => setShowAnswer(!showAnswer)}
+      >
+        <Text style={styles.buttonText}>
+          {showAnswer ? "Hide Answer" : "Show Answer"}
+        </Text>
       </TouchableOpacity>
     </View>
   );
