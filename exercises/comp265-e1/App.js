@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
-import { Picker } from "@react-native-picker/picker"; // Install this if you haven't
+import { Picker } from "@react-native-picker/picker";
 
 function WeatherApp() {
   const [unit, setUnit] = useState("C"); // 'C' for Celsius, 'F' for Fahrenheit

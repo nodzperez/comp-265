@@ -31,15 +31,17 @@ export default function App() {
   //flashcard proper
   return (
     <View style={styles.container}>
+      <Text>Click the flash card to reveal the Answer</Text>
       {/* display question or answer based on the state of showAnswer */}
       <TouchableOpacity
         style={styles.card}
         onPress={() => setShowAnswer(!showAnswer)}
       >
-        <Text style={styles.text}>
+        <Text style={styles.cardText}>
           {showAnswer ? flashCards[index].answer : flashCards[index].question}
         </Text>
       </TouchableOpacity>
+
       {/* show answer button */}
       <TouchableOpacity
         style={styles.button}
@@ -56,8 +58,40 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f4f4f4",
+    padding: 20,
+  },
+
+  card: {
+    width: "90%",
+    height: 200,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 6,
+    elevation: 4,
+    marginBottom: 20,
+    padding: 20,
+  },
+
+  cardText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+
+  button: {
+    backgroundColor: "#28A745",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    width: "80%",
+    alignItems: "center",
   },
 });
