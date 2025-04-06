@@ -69,14 +69,14 @@ export default function App() {
       </TouchableOpacity>
 
       {/* Tap to See Answer Text */}
-      <Text style={styles.tapToSee}>Tap to see Answer</Text>
+      <Text style={styles.tapToSee}>Tap to flip card and see Answer</Text>
 
       {/* Action Buttons */}
       <View style={styles.buttonRow}>
-        <TouchableOpacity style={styles.iconButton} onPress={nextCard}>
+        <TouchableOpacity style={styles.dislikeButton} onPress={nextCard}>
           <AntDesign name="dislike1" size={24} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton} onPress={nextCard}>
+        <TouchableOpacity style={styles.likeButton} onPress={nextCard}>
           <AntDesign name="like1" size={24} color="white" />
         </TouchableOpacity>
       </View>
@@ -150,8 +150,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     marginTop: 12,
   },
-  iconButton: {
-    backgroundColor: "#f7347a",
+  likeButton: {
+    backgroundColor: "#2E7D32",
+    padding: 16,
+    borderRadius: 12,
+  },
+  dislikeButton: {
+    backgroundColor: "#C62828",
     padding: 16,
     borderRadius: 12,
   },
