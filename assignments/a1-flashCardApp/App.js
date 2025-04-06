@@ -23,6 +23,54 @@ const flashCards = [
     question: "What is the capital of Alberta?",
     answer: "Edmonton",
   },
+  {
+    question: "What is the largest planet in our solar system?",
+    answer: "Jupiter",
+  },
+  {
+    question: "Who painted the Mona Lisa?",
+    answer: "Leonardo da Vinci",
+  },
+  {
+    question: "What is the chemical symbol for water?",
+    answer: "H₂O",
+  },
+  {
+    question: "What year did the Titanic sink?",
+    answer: "1912",
+  },
+  {
+    question: "What is the fastest land animal?",
+    answer: "Cheetah",
+  },
+  {
+    question: "How many continents are there?",
+    answer: "7",
+  },
+  {
+    question: "What language is primarily spoken in Brazil?",
+    answer: "Portuguese",
+  },
+  {
+    question: "What is the square root of 64?",
+    answer: "8",
+  },
+  {
+    question: "Who is the author of 'Harry Potter'?",
+    answer: "J.K. Rowling",
+  },
+  {
+    question: "What gas do plants absorb from the atmosphere?",
+    answer: "Carbon Dioxide (CO₂)",
+  },
+  {
+    question: "Which ocean is the largest?",
+    answer: "Pacific Ocean",
+  },
+  {
+    question: "What is the boiling point of water in Celsius?",
+    answer: "100°C",
+  },
 ];
 
 export default function App() {
