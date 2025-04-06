@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import React, { useState } from "react";
+import { AntDesign } from "@expo/vector-icons";
 
 // declare an array of flashcards
 const flashCards = [
@@ -23,6 +30,8 @@ export default function App() {
   const [index, setIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
 
+  const progress = ((index + 1) / flashCards.length) * 100;
+
   const nextCard = () => {
     setIndex((index + 1) % flashCards.length);
     setShowAnswer(false);
@@ -30,68 +39,120 @@ export default function App() {
 
   //flashcard proper
   return (
-    <View style={styles.container}>
-      <Text>Click the flash card to reveal the Answer</Text>
-      {/* display question or answer based on the state of showAnswer */}
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="light" />
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Flashcards App</Text>
+      </View>
+
+      {/* Progress Text */}
+      <Text style={styles.progressText}>
+        Question {index + 1} of {flashCards.length} Completed
+      </Text>
+
+      {/* Progress Bar */}
+      <View style={styles.progressBarContainer}>
+        <View style={[styles.progressBar, { width: `${progress}%` }]} />
+      </View>
+
+      {/* Flashcard */}
       <TouchableOpacity
         style={styles.card}
         onPress={() => setShowAnswer(!showAnswer)}
       >
         <Text style={styles.cardText}>
-          {showAnswer ? flashCards[index].answer : flashCards[index].question}
+          {showAnswer
+            ? flashCards[index].answer
+            : `Q. ${flashCards[index].question}`}
         </Text>
       </TouchableOpacity>
 
-      {/* show answer button */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setShowAnswer(!showAnswer)}
-      >
-        <Text style={styles.buttonText}>
-          {showAnswer ? "Hide Answer" : "Show Answer"}
-        </Text>
-      </TouchableOpacity>
-    </View>
+      {/* Tap to See Answer Text */}
+      <Text style={styles.tapToSee}>Tap to see Answer</Text>
+
+      {/* Action Buttons */}
+      <View style={styles.buttonRow}>
+        <TouchableOpacity style={styles.iconButton} onPress={nextCard}>
+          <AntDesign name="dislike1" size={24} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.iconButton} onPress={nextCard}>
+          <AntDesign name="like1" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f4f4f4",
-    padding: 20,
+    backgroundColor: "#f7f7f7",
+    paddingHorizontal: 20,
+    paddingTop: 40,
   },
-
-  card: {
-    width: "90%",
-    height: 200,
-    backgroundColor: "white",
-    justifyContent: "center",
+  header: {
+    backgroundColor: "#f7347a",
+    padding: 16,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
     alignItems: "center",
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 6,
-    elevation: 4,
-    marginBottom: 20,
-    padding: 20,
+    marginBottom: 16,
   },
-
-  cardText: {
-    fontSize: 20,
+  headerText: {
+    color: "white",
+    fontSize: 22,
     fontWeight: "bold",
-    textAlign: "center",
   },
-
-  button: {
-    backgroundColor: "#28A745",
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    width: "80%",
+  progressText: {
+    textAlign: "center",
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  progressBarContainer: {
+    height: 6,
+    backgroundColor: "#ddd",
+    borderRadius: 10,
+    overflow: "hidden",
+    marginBottom: 24,
+  },
+  progressBar: {
+    height: 6,
+    backgroundColor: "#f7347a",
+  },
+  card: {
+    backgroundColor: "white",
+    padding: 24,
+    borderRadius: 12,
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    justifyContent: "center",
     alignItems: "center",
+    marginHorizontal: 10,
+    marginBottom: 12,
+    height: 180,
+  },
+  cardText: {
+    fontSize: 18,
+    textAlign: "center",
+    color: "#333",
+  },
+  tapToSee: {
+    textAlign: "center",
+    color: "#666",
+    marginBottom: 20,
+  },
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 12,
+  },
+  iconButton: {
+    backgroundColor: "#f7347a",
+    padding: 16,
+    borderRadius: 12,
   },
 });
