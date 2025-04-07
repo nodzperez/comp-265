@@ -9,6 +9,7 @@ import {
   TextInput,
   Button,
   Switch,
+  Image,
 } from "react-native";
 import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -112,9 +113,13 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
 
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Flash Back</Text>
+      {/* Header - Logo*/}
+      <View style={styles.logoContainer}>
+        <Image
+          source={require("./assets/logo.png")}
+          style={styles.logo}
+          resizeMode="contain"
+        />
       </View>
 
       {/* Progress Text */}
@@ -191,15 +196,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f0f4f8",
     paddingHorizontal: 20,
-    paddingTop: 40,
-  },
-  header: {
-    backgroundColor: "#0077B6",
-    padding: 16,
-    borderRadius: 12,
-    alignItems: "center",
-    marginBottom: 16,
-    marginTop: 40,
   },
   headerText: {
     color: "white",
@@ -301,5 +297,13 @@ const styles = StyleSheet.create({
   },
   cardTextDark: {
     color: "#fff",
+  },
+  logoContainer: {
+    alignItems: "center",
+    marginBottom: -70,
+  },
+  logo: {
+    width: 250,
+    height: 250,
   },
 });
