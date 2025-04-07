@@ -93,6 +93,8 @@ export default function App() {
     if (inputAnswer.toLowerCase() === flashCards[index].answer.toLowerCase()) {
       alert("You're Correct!!! You're so smart!");
       setInputAnswer("");
+    } else if (inputAnswer === "") {
+      alert("Enter an answer first!!!");
     } else {
       alert("Try Again Loser!!!");
     }
@@ -146,7 +148,10 @@ export default function App() {
           value={inputAnswer}
           onChangeText={setInputAnswer}
         />
-        <Button title="Submit" onPress={handleAnswerSubmit} />
+
+        <View style={styles.buttonContainer}>
+          <Button title="Submit" onPress={handleAnswerSubmit} color="#0077B6" />
+        </View>
 
         {/* Action Buttons */}
         <View style={styles.buttonRow}>
@@ -249,5 +254,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#F44336",
     padding: 16,
     borderRadius: 12,
+  },
+  buttonContainer: {
+    marginVertical: 12,
+    borderRadius: 8,
+    overflow: "hidden",
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
   },
 });
