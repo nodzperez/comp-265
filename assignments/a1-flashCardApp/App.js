@@ -5,6 +5,9 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
+  ScrollView,
+  TextInput,
+  Button,
 } from "react-native";
 import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -32,8 +35,8 @@ const flashCards = [
     answer: "Leonardo da Vinci",
   },
   {
-    question: "What is the chemical symbol for water?",
-    answer: "H₂O",
+    question: "What is the chemical symbol for gold?",
+    answer: "Au",
   },
   {
     question: "What year did the Titanic sink?",
@@ -61,7 +64,7 @@ const flashCards = [
   },
   {
     question: "What gas do plants absorb from the atmosphere?",
-    answer: "Carbon Dioxide (CO₂)",
+    answer: "Carbon Dioxide",
   },
   {
     question: "Which ocean is the largest?",
@@ -69,7 +72,7 @@ const flashCards = [
   },
   {
     question: "What is the boiling point of water in Celsius?",
-    answer: "100°C",
+    answer: "100",
   },
 ];
 
@@ -77,6 +80,7 @@ export default function App() {
   //declare state variables
   const [index, setIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [inputAnswer, setInputAnswer] = useState("");
 
   const progress = ((index + 1) / flashCards.length) * 100;
 
@@ -85,13 +89,23 @@ export default function App() {
     setShowAnswer(false);
   };
 
+  const handleAnswerSubmit = () => {
+    if (inputAnswer.toLowerCase() === flashCards[index].answer.toLowerCase()) {
+      alert("You're Correct!!! You're so smart!");
+      setInputAnswer("");
+    } else {
+      alert("Try Again Loser!!!");
+    }
+  };
+
   //flashcard proper
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
+
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerText}>Flashcards App</Text>
+        <Text style={styles.headerText}>Flash Back</Text>
       </View>
 
       {/* Progress Text */}
@@ -105,29 +119,45 @@ export default function App() {
       </View>
 
       {/* Flashcard */}
-      <TouchableOpacity
-        style={styles.card}
-        onPress={() => setShowAnswer(!showAnswer)}
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 0.5,
+          justifyContent: "center",
+        }}
       >
-        <Text style={styles.cardText}>
-          {showAnswer
-            ? flashCards[index].answer
-            : `Q. ${flashCards[index].question}`}
-        </Text>
-      </TouchableOpacity>
-
-      {/* Tap to See Answer Text */}
-      <Text style={styles.tapToSee}>Tap to flip card and see Answer</Text>
-
-      {/* Action Buttons */}
-      <View style={styles.buttonRow}>
-        <TouchableOpacity style={styles.dislikeButton} onPress={nextCard}>
-          <AntDesign name="dislike1" size={24} color="white" />
+        <TouchableOpacity
+          style={styles.card}
+          onPress={() => setShowAnswer(!showAnswer)}
+        >
+          <Text style={styles.cardText}>
+            {showAnswer
+              ? flashCards[index].answer
+              : `Q. ${flashCards[index].question}`}
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.likeButton} onPress={nextCard}>
-          <AntDesign name="like1" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
+
+        {/* Tap to See Answer Text */}
+        <Text style={styles.tapToSee}>Tap to flip card and see Answer</Text>
+
+        {/* TextInput for user's Answers */}
+        <TextInput
+          style={styles.input}
+          placeholder="Your Answer"
+          value={inputAnswer}
+          onChangeText={setInputAnswer}
+        />
+        <Button title="Submit" onPress={handleAnswerSubmit} />
+
+        {/* Action Buttons */}
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.dislikeButton} onPress={nextCard}>
+            <AntDesign name="dislike1" size={32} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.likeButton} onPress={nextCard}>
+            <AntDesign name="like1" size={32} color="white" />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -135,26 +165,28 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f7f7f7",
+    backgroundColor: "#f0f4f8",
     paddingHorizontal: 20,
     paddingTop: 40,
   },
   header: {
-    backgroundColor: "#f7347a",
+    backgroundColor: "#0077B6",
     padding: 16,
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
+    borderRadius: 12,
     alignItems: "center",
     marginBottom: 16,
+    marginTop: 40,
   },
   headerText: {
     color: "white",
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: "bold",
   },
   progressText: {
     textAlign: "center",
     fontSize: 16,
+    fontWeight: "500",
+    color: "#555",
     marginBottom: 8,
   },
   progressBarContainer: {
@@ -166,10 +198,10 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: 6,
-    backgroundColor: "#f7347a",
+    backgroundColor: "#0077B6",
   },
   card: {
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     padding: 24,
     borderRadius: 12,
     elevation: 5,
@@ -180,18 +212,28 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 10,
-    marginBottom: 12,
-    height: 180,
+    marginBottom: 8,
+    height: 200,
   },
   cardText: {
-    fontSize: 18,
+    fontSize: 32,
     textAlign: "center",
     color: "#333",
   },
   tapToSee: {
     textAlign: "center",
     color: "#666",
-    marginBottom: 20,
+    fontSize: 14,
+    marginBottom: 50,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 12,
+    marginVertical: 8,
+    backgroundColor: "#f9f9f9",
+    borderRadius: 8,
+    fontSize: 16,
   },
   buttonRow: {
     flexDirection: "row",
@@ -199,12 +241,12 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   likeButton: {
-    backgroundColor: "#2E7D32",
+    backgroundColor: "#4CAF50",
     padding: 16,
     borderRadius: 12,
   },
   dislikeButton: {
-    backgroundColor: "#C62828",
+    backgroundColor: "#F44336",
     padding: 16,
     borderRadius: 12,
   },
