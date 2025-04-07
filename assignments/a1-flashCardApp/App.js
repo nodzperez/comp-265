@@ -130,10 +130,22 @@ export default function App() {
       {/* Flashcard */}
       <ScrollView
         contentContainerStyle={{
-          flexGrow: 0.5,
+          flexGrow: 0.4,
           justifyContent: "center",
         }}
       >
+        {/* Switch for Card Color */}
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchText}>
+            {isCardDark ? "Dark Card" : "Light Card"}
+          </Text>
+          <Switch
+            value={isCardDark}
+            onValueChange={toggleCardColor}
+            thumbColor={isCardDark ? "#333" : "#ccc"}
+            trackColor={{ false: "#ddd", true: "#90E0EF" }}
+          />
+        </View>
         <TouchableOpacity
           style={[styles.card, isCardDark && styles.cardDark]}
           onPress={() => setShowAnswer(!showAnswer)}
@@ -170,19 +182,6 @@ export default function App() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-      {/* Switch for Card Color */}
-      <View style={styles.switchContainer}>
-        <Text style={styles.switchText}>
-          {isCardDark ? "Dark Card" : "Light Card"}
-        </Text>
-        <Switch
-          value={isCardDark}
-          onValueChange={toggleCardColor}
-          thumbColor={isCardDark ? "#333" : "#ccc"}
-          trackColor={{ false: "#ddd", true: "#90E0EF" }}
-        />
-      </View>
     </SafeAreaView>
   );
 }
@@ -249,7 +248,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#666",
     fontSize: 14,
-    marginBottom: 50,
+    marginBottom: 20,
   },
   input: {
     borderWidth: 1,
@@ -289,7 +288,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 16,
+    marginBottom: 0,
     paddingHorizontal: 10,
   },
   switchText: {
