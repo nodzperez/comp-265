@@ -8,6 +8,7 @@ import {
   ScrollView,
   TextInput,
   Button,
+  Switch,
 } from "react-native";
 import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -100,6 +101,12 @@ export default function App() {
     }
   };
 
+  const [isCardDark, setIsCardDark] = useState(false);
+
+  const toggleCardColor = () => {
+    setIsCardDark((previousState) => !previousState);
+  };
+
   //flashcard proper
   return (
     <SafeAreaView style={styles.container}>
@@ -128,10 +135,10 @@ export default function App() {
         }}
       >
         <TouchableOpacity
-          style={styles.card}
+          style={[styles.card, isCardDark && styles.cardDark]}
           onPress={() => setShowAnswer(!showAnswer)}
         >
-          <Text style={styles.cardText}>
+          <Text style={[styles.cardText, isCardDark && styles.cardDark]}>
             {showAnswer
               ? flashCards[index].answer
               : `Q. ${flashCards[index].question}`}
@@ -163,6 +170,19 @@ export default function App() {
           </TouchableOpacity>
         </View>
       </ScrollView>
+
+      {/* Switch for Card Color */}
+      <View style={styles.switchContainer}>
+        <Text style={styles.switchText}>
+          {isCardDark ? "Dark Card" : "Light Card"}
+        </Text>
+        <Switch
+          value={isCardDark}
+          onValueChange={toggleCardColor}
+          thumbColor={isCardDark ? "#333" : "#ccc"}
+          trackColor={{ false: "#ddd", true: "#90E0EF" }}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -264,5 +284,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
+  },
+  switchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 16,
+    paddingHorizontal: 10,
+  },
+  switchText: {
+    fontSize: 16,
+    color: "#333",
+  },
+  cardDark: {
+    backgroundColor: "#333",
+    color: "#fff",
+  },
+  cardTextDark: {
+    color: "#fff",
   },
 });
