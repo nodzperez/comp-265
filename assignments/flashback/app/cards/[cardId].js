@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useLocalSearchParams } from "expo-router";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { View, Text, StyleSheet, Pressable, Button } from "react-native";
 
 export default function FlashcardScreen() {
   const { cardId } = useLocalSearchParams();
+  const router = useRouter();
   const [showAnswer, setShowAnswer] = useState(false);
 
   const flashcards = {
@@ -20,7 +21,6 @@ export default function FlashcardScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Flashcard #{cardId}</Text>
-
       <Pressable style={styles.card} onPress={() => setShowAnswer(!showAnswer)}>
         <Text style={styles.content}>
           {showAnswer ? card.answer : card.question}
@@ -29,6 +29,7 @@ export default function FlashcardScreen() {
           {showAnswer ? "Tap to hide answer" : "Tap to reveal answer"}
         </Text>
       </Pressable>
+      <Button title="Go Back" onPress={() => router.back()} />
     </View>
   );
 }

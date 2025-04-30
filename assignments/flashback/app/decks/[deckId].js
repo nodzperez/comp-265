@@ -16,6 +16,7 @@ export default function DeckDetailScreen() {
         title="View Flashcard 1"
         onPress={() => router.push("/cards/1")}
       />
+      <Button title="Go Back" onPress={() => router.back()} />
     </View>
   );
 }
