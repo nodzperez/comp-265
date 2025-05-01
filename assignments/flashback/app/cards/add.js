@@ -12,7 +12,7 @@ export default function AddCardScreen() {
     }
 
     console.log("Flashcard saved:", { question, answer });
-    Alert.alert("Saved!", "Your flashcard was saved (in console).");
+    Alert.alert("Saved!", "Your flashcard was saved in my heart lol!");
     setQuestion("");
     setAnswer("");
   };

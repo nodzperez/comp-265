@@ -10,7 +10,7 @@ export default function DeckDetailScreen() {
       <View style={styles.card}>
         <Text style={styles.title}>{deckId} Deck</Text>
         <Text style={styles.description}>
-          Ready to study the flashcards in the "{deckId}" deck?
+          Ready to study the flashcards in the {deckId} deck?
         </Text>
       </View>
 
@@ -81,4 +81,10 @@ const styles = StyleSheet.create({
     color: "#0072bc",
     textAlign: "center",
   },
+});
+
+export const screenOptions = ({ params }) => ({
+  title: `${params.deckId.charAt(0).toUpperCase()}${params.deckId.slice(
+    1
+  )} Deck`,
 });

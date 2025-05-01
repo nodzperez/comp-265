@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+  Button,
+} from "react-native";
 import { useRouter } from "expo-router";
 
 const decks = [
@@ -27,6 +34,12 @@ export default function DeckListScreen() {
           <Text style={styles.deckSub}>{deck.count} flashcards</Text>
         </Pressable>
       ))}
+
+      <Button
+        title="Add a Flashcard"
+        onPress={() => router.push("/cards/add")}
+        color="#ffd600"
+      />
     </ScrollView>
   );
 }
