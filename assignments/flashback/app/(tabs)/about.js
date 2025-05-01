@@ -6,14 +6,27 @@ export default function AboutScreen() {
   const router = useRouter();
   const [darkMode, setDarkMode] = useState(false);
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>About Flashback</Text>
+  const containerStyle = [
+    styles.container,
+    darkMode && { backgroundColor: "#121212" },
+  ];
 
-      <Button title="App Info (Modal)" onPress={() => router.push("/modal")} />
+  const textStyle = [styles.title, darkMode && { color: "#fff" }];
+
+  const labelStyle = [styles.label, darkMode && { color: "#ccc" }];
+
+  return (
+    <View style={containerStyle}>
+      <Text style={textStyle}>About Flashback</Text>
+
+      <Button
+        title="App Info (Modal)"
+        onPress={() => router.push("/modal")}
+        color={darkMode ? "#888" : undefined}
+      />
 
       <View style={styles.settingItem}>
-        <Text style={styles.label}>Dark Mode</Text>
+        <Text style={labelStyle}>Dark Mode</Text>
         <Switch value={darkMode} onValueChange={setDarkMode} />
       </View>
     </View>
@@ -21,7 +34,11 @@ export default function AboutScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", paddingHorizontal: 20 },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 20,
+  },
   title: {
     fontSize: 24,
     fontWeight: "bold",
@@ -37,5 +54,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#ccc",
   },
-  label: { fontSize: 18 },
+  label: {
+    fontSize: 18,
+  },
 });
