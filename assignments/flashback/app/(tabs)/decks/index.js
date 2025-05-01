@@ -2,9 +2,9 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 
 const decks = [
-  { id: "math", title: "Math Basics" },
-  { id: "history", title: "World History" },
-  { id: "science", title: "General Science" },
+  { id: "Math", title: "Math Basics" },
+  { id: "History", title: "World History" },
+  { id: "Science", title: "General Science" },
 ];
 
 export default function DeckListScreen() {
@@ -17,7 +17,10 @@ export default function DeckListScreen() {
       {decks.map((deck) => (
         <Pressable
           key={deck.id}
-          style={styles.deck}
+          style={({ pressed }) => [
+            styles.deckCard,
+            pressed && styles.deckCardPressed,
+          ]}
           onPress={() => router.push(`/decks/${deck.id}`)}
         >
           <Text style={styles.deckTitle}>{deck.title}</Text>
@@ -28,13 +31,31 @@ export default function DeckListScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 20 },
-  heading: { fontSize: 22, fontWeight: "bold", marginBottom: 20 },
-  deck: {
-    backgroundColor: "#e0f7fa",
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 10,
+  container: {
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+    backgroundColor: "#f5f5f5",
   },
-  deckTitle: { fontSize: 18 },
+  heading: {
+    fontSize: 26,
+    fontWeight: "600",
+    marginBottom: 24,
+    color: "#0072bc",
+  },
+  deckCard: {
+    backgroundColor: "#ffffff",
+    paddingVertical: 18,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    elevation: 2,
+    marginBottom: 16,
+  },
+  deckCardPressed: {
+    opacity: 0.8,
+  },
+  deckTitle: {
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#222",
+  },
 });

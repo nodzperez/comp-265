@@ -1,5 +1,5 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 
 export default function DeckDetailScreen() {
   const { deckId } = useLocalSearchParams();
@@ -7,22 +7,38 @@ export default function DeckDetailScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Deck: {deckId}</Text>
-      <Text style={styles.description}>
-        This is the detail screen for the "{deckId}" deck.
-      </Text>
+      <View style={styles.card}>
+        <Text style={styles.title}>{deckId} Deck</Text>
+        <Text style={styles.description}>
+          Study flashcards in the "{deckId}" deck.
+        </Text>
+      </View>
 
-      <Button
-        title="View Flashcard 1"
-        onPress={() => router.push("/cards/1")}
-      />
+      <View style={styles.buttons}>
+        <Pressable
+          style={({ pressed }) => [
+            styles.buttonPrimary,
+            pressed && styles.buttonPressed,
+          ]}
+          onPress={() => router.push("/cards/1")}
+        >
+          <Text style={styles.buttonText}>View Flashcard 1</Text>
+        </Pressable>
 
-      <Button
-        title="Add a Flashcard"
-        onPress={() => router.push("/cards/add")}
-      />
+        <Pressable
+          style={({ pressed }) => [
+            styles.buttonSecondary,
+            pressed && styles.buttonPressed,
+          ]}
+          onPress={() => router.push("/cards/add")}
+        >
+          <Text style={styles.buttonText}>Add a Flashcard</Text>
+        </Pressable>
 
-      <Button title="Go Back" onPress={() => router.back()} />
+        <Pressable onPress={() => router.back()}>
+          <Text style={styles.backText}>← Go Back</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -30,10 +46,54 @@ export default function DeckDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 24,
+    backgroundColor: "#f5f5f5",
     justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
   },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 10 },
-  description: { fontSize: 16, marginBottom: 20, textAlign: "center" },
+  card: {
+    backgroundColor: "#ffffff",
+    padding: 24,
+    borderRadius: 12,
+    elevation: 3,
+    marginBottom: 30,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: "600",
+    marginBottom: 8,
+    color: "#0072bc",
+  },
+  description: {
+    fontSize: 16,
+    color: "#666",
+  },
+  buttons: {
+    gap: 16,
+  },
+  buttonPrimary: {
+    backgroundColor: "#0072bc",
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  buttonSecondary: {
+    backgroundColor: "#ffd600",
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  buttonPressed: {
+    opacity: 0.75,
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "500",
+    fontSize: 16,
+  },
+  backText: {
+    marginTop: 16,
+    fontSize: 14,
+    color: "#0072bc",
+    textAlign: "center",
+  },
 });

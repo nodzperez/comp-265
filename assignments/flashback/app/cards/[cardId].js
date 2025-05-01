@@ -21,7 +21,11 @@ export default function FlashcardScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Flashcard #{cardId}</Text>
-      <Pressable style={styles.card} onPress={() => setShowAnswer(!showAnswer)}>
+
+      <Pressable
+        style={({ pressed }) => [styles.card, pressed && { opacity: 0.9 }]}
+        onPress={() => setShowAnswer(!showAnswer)}
+      >
         <Text style={styles.content}>
           {showAnswer ? card.answer : card.question}
         </Text>
@@ -29,7 +33,10 @@ export default function FlashcardScreen() {
           {showAnswer ? "Tap to hide answer" : "Tap to reveal answer"}
         </Text>
       </Pressable>
-      <Button title="Go Back" onPress={() => router.back()} />
+
+      <View style={styles.button}>
+        <Button title="Go Back" onPress={() => router.back()} color="#0072bc" />
+      </View>
     </View>
   );
 }
@@ -39,16 +46,34 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    padding: 24,
+    backgroundColor: "#f5f5f5",
   },
-  title: { fontSize: 22, marginBottom: 20 },
+  title: {
+    fontSize: 22,
+    marginBottom: 20,
+    color: "#0072bc",
+    fontWeight: "600",
+  },
   card: {
-    backgroundColor: "#e0f2f1",
+    backgroundColor: "#ffffff",
     padding: 30,
     borderRadius: 12,
     alignItems: "center",
     width: "90%",
+    elevation: 3,
   },
-  content: { fontSize: 20, fontWeight: "bold" },
-  hint: { fontSize: 14, color: "#888", marginTop: 10 },
+  content: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#222",
+  },
+  hint: {
+    fontSize: 14,
+    color: "#888",
+    marginTop: 10,
+  },
+  button: {
+    marginTop: 24,
+  },
 });
