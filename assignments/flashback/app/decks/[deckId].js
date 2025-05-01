@@ -10,7 +10,7 @@ export default function DeckDetailScreen() {
       <View style={styles.card}>
         <Text style={styles.title}>{deckId} Deck</Text>
         <Text style={styles.description}>
-          Study flashcards in the "{deckId}" deck.
+          Ready to study the flashcards in the "{deckId}" deck?
         </Text>
       </View>
 
@@ -20,19 +20,9 @@ export default function DeckDetailScreen() {
             styles.buttonPrimary,
             pressed && styles.buttonPressed,
           ]}
-          onPress={() => router.push("/cards/1")}
+          onPress={() => router.push(`/decks/${deckId}/0`)}
         >
-          <Text style={styles.buttonText}>View Flashcard 1</Text>
-        </Pressable>
-
-        <Pressable
-          style={({ pressed }) => [
-            styles.buttonSecondary,
-            pressed && styles.buttonPressed,
-          ]}
-          onPress={() => router.push("/cards/add")}
-        >
-          <Text style={styles.buttonText}>Add a Flashcard</Text>
+          <Text style={styles.buttonText}>Start Flashcards</Text>
         </Pressable>
 
         <Pressable onPress={() => router.back()}>
@@ -62,6 +52,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginBottom: 8,
     color: "#0072bc",
+    textTransform: "capitalize",
   },
   description: {
     fontSize: 16,
@@ -72,12 +63,6 @@ const styles = StyleSheet.create({
   },
   buttonPrimary: {
     backgroundColor: "#0072bc",
-    paddingVertical: 14,
-    borderRadius: 8,
-    alignItems: "center",
-  },
-  buttonSecondary: {
-    backgroundColor: "#ffd600",
     paddingVertical: 14,
     borderRadius: 8,
     alignItems: "center",

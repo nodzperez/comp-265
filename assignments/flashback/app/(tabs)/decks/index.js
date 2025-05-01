@@ -2,9 +2,9 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 
 const decks = [
-  { id: "Math", title: "Math Basics" },
-  { id: "History", title: "World History" },
-  { id: "Science", title: "General Science" },
+  { id: "math", title: "Math Basics", count: 3 },
+  { id: "history", title: "World History", count: 3 },
+  { id: "science", title: "General Science", count: 3 },
 ];
 
 export default function DeckListScreen() {
@@ -24,6 +24,7 @@ export default function DeckListScreen() {
           onPress={() => router.push(`/decks/${deck.id}`)}
         >
           <Text style={styles.deckTitle}>{deck.title}</Text>
+          <Text style={styles.deckSub}>{deck.count} flashcards</Text>
         </Pressable>
       ))}
     </ScrollView>
@@ -57,5 +58,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     color: "#222",
+  },
+  deckSub: {
+    fontSize: 14,
+    color: "#666",
+    marginTop: 4,
   },
 });

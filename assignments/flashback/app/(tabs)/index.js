@@ -9,7 +9,10 @@ export default function HomeScreen() {
         resizeMode="contain"
       />
       <Text style={styles.title}>Welcome to Flashback</Text>
-      <Text style={styles.subtitle}>Your flashcard study companion.</Text>
+      <Text style={styles.subtitle}>
+        Use Flashback to create and review flashcards from different subjects.
+        Tap to reveal answers and track your progress.
+      </Text>
     </View>
   );
 }

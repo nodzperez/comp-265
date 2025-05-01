@@ -8,8 +8,10 @@ export default function ModalScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>About Flashback</Text>
       <Text style={styles.body}>
-        Flashback helps you study with flashcards. Tap cards to flip, add your
-        own, and test yourself!
+        Flashback is designed to help students and learners review concepts
+        through interactive flashcards. This app was created using Expo Router,
+        React Native, and follows Android design patterns for Geremy's class.
+        React native is cool, flashback is cooler lol.
       </Text>
       <Button title="Close" onPress={() => router.back()} />
     </View>
